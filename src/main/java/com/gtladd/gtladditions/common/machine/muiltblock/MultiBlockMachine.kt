@@ -33,6 +33,7 @@ import com.gtladd.gtladditions.api.machine.multiblock.GTLAddWorkableElectricPara
 import com.gtladd.gtladditions.api.machine.mutable.MutableElectricMultiblockMachine
 import com.gtladd.gtladditions.api.registry.GTLAddRegistration.Companion.REGISTRATE
 import com.gtladd.gtladditions.client.render.machine.ForgeOfAntichristRenderer
+import com.gtladd.gtladditions.client.render.machine.FuxiBaguaHeavenForgingFurnaceRenderer
 import com.gtladd.gtladditions.client.render.machine.HeartOfTheUniverseRenderer
 import com.gtladd.gtladditions.client.render.machine.LightHunterSpaceStationRenderer
 import com.gtladd.gtladditions.client.render.machine.PartWorkableCasingMachineRenderer
@@ -870,10 +871,16 @@ object MultiBlockMachine {
                     }
                 }
             }
-            .workableCasingRenderer(
-                GTLCore.id("block/casings/dimension_injection_casing"),
-                GTCEu.id("block/multiblock/fusion_reactor")
-            )
+            .renderer {
+                FuxiBaguaHeavenForgingFurnaceRenderer(
+                    GTLCore.id("block/casings/dimension_injection_casing"),
+                    GTCEu.id("block/multiblock/fusion_reactor"),
+                    DIMENSION_INJECTION_CASING,
+                    GTLCore.id("block/casings/dimension_injection_casing")
+                )
+            }
+            .partAppearance { controller, part, side -> DIMENSION_INJECTION_CASING.get().defaultBlockState() }
+            .hasTESR(true)
             .register()
 
         ANTIENTROPY_CONDENSATION_CENTER = REGISTRATE.multiblock("antientropy_condensation_center",
